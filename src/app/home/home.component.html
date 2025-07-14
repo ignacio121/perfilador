@@ -1,0 +1,61 @@
+<div class="container">
+
+  <div class="title"><img src='assets/Logotipo.png' alt='Logo transbank'/>Perfilador</div>
+  <p>Desliza hacia abajo y conoce cómo esta innovadora herramienta puede transformar tu forma de operar.</p>
+</div>
+
+<div class="scroll-section">
+  <h2>Gestión centralizada de usuarios y seguridad robusta</h2>
+  <p>
+    Con <strong>Transbank Perfilador</strong>, tu empresa gestiona el acceso de los usuarios de forma centralizada, eliminando procesos manuales y minimizando riesgos operativos. Define perfiles, asigna permisos específicos y supervisa en tiempo real cada actividad clave, todo desde una <strong>interfaz intuitiva y altamente confiable.</strong>
+  </p>
+  <p>
+    Nuestra solución ha sido desarrollada para alinear tecnología y negocio, asegurando que <strong>solo las personas correctas accedan a la información correcta, en el momento indicado.</strong> Esta visibilidad y control no solo fortalece la seguridad interna, sino que también facilita el cumplimiento de normativas locales e internacionales, sin depender de conocimientos técnicos avanzados.
+  </p>
+  <p>
+    Transbank Perfilador le permitira a nuestra organización escalar con confianza, manteniendo altos estándares de <strong>gobernanza y eficiencia operativa.</strong> Porque cuando el acceso está bien gestionado, todo funciona mejor.
+  </p>
+</div>
+<div class="scroll-section">
+  <h2>Gestión de roles más ágil, soporte más eficaz</h2>
+  <p>
+    Con esta nueva herramienta, el equipo de soporte de Transbank podrá <strong>asistir a los comercios en la administración de accesos y roles de forma más rápida y segura.</strong> Gracias a perfiles predefinidos y un control centralizado, será posible guiar a cada cliente según sus necesidades específicas: asignando permisos adecuados, resolviendo dudas sobre accesos y corrigiendo errores de forma oportuna.
+  </p>
+  <p>
+    Este nuevo enfoque no solo optimiza nuestra operación interna, sino que <strong>te da a ti como soporte mayor autonomía para entregar respuestas claras y soluciones</strong> inmediatas, sin depender de múltiples sistemas ni procesos complejos. Porque cuando sabes exactamente cómo está configurado el acceso de cada cliente, puedes ayudarlos con confianza y precisión.
+  </p>
+</div>
+<div class="scroll-section">
+  <h2>Trazabilidad y respaldo en cada acción</h2>
+  <p>Todas las acciones realizadas dentro del sistema quedan registradas. Esto significa que ante cualquier duda o requerimiento, <strong>tendrás a tu disposición un historial transparente</strong> de cada movimiento: quién accedió, qué cambios hizo y cuándo lo hizo. Este nivel de seguimiento no solo <strong>fortalece la seguridad y confianza</strong> en el uso de la herramienta, sino que también te respalda a ti como parte del equipo de soporte, ayudando a resolver incidencias de forma más rápida y documentada.</p>
+</div>
+
+<div class="button-container" id="login-section" #loginSection>
+  <button class="login-button mat-raised-button" color="primary" (click)="login('Username-Password-Authentication')">
+    Iniciar sesión (antiguos)
+  </button>
+</div>
+<div class="button-container" id="login-section" #loginSection>
+  <button class="login-button mat-raised-button" color="primary" (click)="login('PoC-Portal-TBK-Internos')">
+    Iniciar sesión ( internos )
+  </button>
+</div>
+<div class="button-container" id="login-section" #loginSection>
+  <button class="login-button mat-raised-button" color="primary" (click)="login('PoC-Portal-TBK-Comercios')">
+    Iniciar sesión ( comercios )
+  </button>
+</div>
+<div class="button-container" id="login-section" #loginSection>
+  <button class="login-button mat-raised-button" color="primary" (click)="login('onepay-test', 'org_RG602fQkzD8g57e6')">
+    Ejemplo onepay
+  </button>
+</div>
+
+
+<div
+  class="fixed-footer"
+  [class.hidden]="loginVisible"
+  (click)="scrollToLogin()"
+>
+  <mat-icon svgIcon="log-in"></mat-icon> Acceder
+</div>

@@ -1,0 +1,57 @@
+<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+  <form [formGroup]="userForm" (ngSubmit)="submitForm()" style="width: 100%; max-width: 400px;">
+    <mat-card class="p-4 rounded-xl shadow-md">
+      <mat-card-title class="text-xl font-semibold mb-4">Crear Usuario</mat-card-title>
+      <mat-card-content>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Conexión</mat-label>
+            <mat-select formControlName="connection" required>
+              <mat-option value="PoC-Portal-TBK-Internos">PoC-Portal-TBK-Internos</mat-option>
+              <mat-option value="PoC-Portal-TBK-Comercios">PoC-Portal-TBK-Comercios</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="Ingrese su correo electrónico" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="given_name" placeholder="Ingrese su nombre" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="family_name" placeholder="Ingrese su apellido" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nickname</mat-label>
+            <input matInput formControlName="nickname" placeholder="Ingrese su apodo" />
+          </mat-form-field>
+
+          @if(userForm.get('connection')?.value === 'PoC-Portal-TBK-Internos') {
+            <mat-form-field appearance="outline">
+              <mat-label>E-Token</mat-label>
+              <input matInput formControlName="username" placeholder="Ingrea e-token" required />
+            </mat-form-field>
+          } @else {
+            <mat-form-field appearance="outline">
+              <mat-label>Rut o identificador</mat-label>
+              <input matInput formControlName="username" placeholder="Ingrese su RUT o identificador" required />
+            </mat-form-field>
+          }
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="flex justify-end mt-4">
+        <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting || userForm.invalid">
+          Crear Usuario
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

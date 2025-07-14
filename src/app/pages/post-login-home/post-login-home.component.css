@@ -1,0 +1,14 @@
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+.welcome-content {
+  margin-top: 100px;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}

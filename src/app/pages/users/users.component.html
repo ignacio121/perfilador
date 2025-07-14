@@ -1,0 +1,116 @@
+<div class="container">
+  @if (users) {
+    <div>
+      <h1>Usuarios</h1>
+
+      <table mat-table [dataSource]="users" multiTemplateDataRows class="mat-elevation-z8 full-width-table">
+
+        <!-- Columnas visibles -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let user" class="clickable">
+            {{ user.name }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email_verified">
+          <th mat-header-cell *matHeaderCellDef>Email verificado</th>
+          <td mat-cell *matCellDef="let user">{{ user.email_verified }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="blocked">
+          <th mat-header-cell *matHeaderCellDef>Bloqueado</th>
+          <td mat-cell *matCellDef="let user">
+            <mat-slide-toggle
+             [checked]="user.blocked"
+             [disabled]="!tienePermiso('change:status')"
+             (change)="onToggleBloqueo(user, $event)"
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="reset">
+          <th mat-header-cell *matHeaderCellDef>Reseteo contraseña</th>
+          <td mat-cell *matCellDef="let user">
+            <button class="send-button" (click)="cambiarPassword(user.email)" [disabled]="!tienePermiso('change:status')">
+              <mat-icon>send</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+
+        <!-- Columna "expandida" (en una fila nueva) -->
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
+            @if (expandedUserId === row.user_id) {
+              <div style="padding: 1rem;">
+                <!-- 👇 Spinner si está cargando -->
+                @if (cargandoDetalleId === row.user_id) {
+                  <div class="spinner-container">
+                    <mat-progress-spinner diameter="40" mode="indeterminate"></mat-progress-spinner>
+                  </div>
+                } @else {
+                  <!-- 👇 Detalles del usuario -->
+                  <div class="detalle-usuario">
+                    <p><strong>Username:</strong> {{ detallesUsuario?.username }}</p>
+                    <p><strong>Correo:</strong> {{ detallesUsuario?.email }}</p>
+                    <p><strong>Verificado:</strong> {{ detallesUsuario?.email_verified ? 'Sí' : 'No' }}</p>
+                    <p><strong>Dirección:</strong> {{ detallesUsuario?.user_metadata?.address }}</p>
+                    <p><strong>Organizaciones:</strong></p>
+                    <ul>
+                      @for (org of detallesUsuario?.organizations; track org.id) {
+                        <li>
+                          <strong>{{ org.display_name }}</strong> ({{ org.name }})
+                          <ul>
+                            @for (rol of org.roles; track rol.id) {
+                              <li>{{ rol.name }}: {{ rol.description }}</li>
+                            }
+                          </ul>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                }
+              </div>
+            }
+          </td>
+        </ng-container>
+
+        <!-- Encabezado -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <!-- Fila de datos principal -->
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="verDetalle(row.user_id)"
+          style="cursor: pointer;"
+        ></tr>
+
+        <!-- Fila de detalle -->
+        <tr
+          mat-row
+          *matRowDef="let row; columns: ['expandedDetail']"
+          class="row-expandida"
+        ></tr>
+
+      </table>
+
+      <mat-paginator
+        [length]="totalItems"
+        [pageSize]="pageSize"
+        [pageIndex]="page - 1"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+  }
+  @else {
+    <div>Cargando usuarios...</div>
+  }
+</div>

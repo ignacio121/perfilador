@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+
+.send-button {
+  background-color: white;
+  border: 0;
+}
+
+.row-expandida td {
+  padding: 0px 16px;
+  background: #f9f9f9;
+  border-top: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detalle-usuario {
+  padding: 0;
+  /* elimina padding interno innecesario */
+  margin: 0;
+}
+
+.detalle-usuario p,
+.detalle-usuario ul {
+  margin: 4px 0;
+}
+
+.detalle-usuario ul {
+  padding-left: 1rem;
+}
+
+table tr.mat-row,
+table tr.mat-header-row {
+  height: auto;
+}
+
+table td,
+table th {
+  padding: 8px 16px;
+}
+
+table tr.row-expandida {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  background: none;
+  border: none;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}

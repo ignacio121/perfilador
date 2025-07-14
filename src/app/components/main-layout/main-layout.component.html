@@ -1,0 +1,72 @@
+<mat-toolbar class="topbar">
+  <div style="display: flex; align-items: center;">
+    <img src="assets/Logotipo.png" alt="Logo transbank" style="height:25px; width:auto; margin-right: 1rem;" />
+    @if (user) {
+      <div class="user-section">
+        <span class="user-info">
+          Hola {{ user.name || user.email }}: estás viendo la cuenta de {{ org_name }}
+        </span>
+        <span class="last-login">
+          Tu último acceso fue el {{ userDetails?.['last_login'] | fechaFormal }}.
+        </span>
+      </div>
+    }
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <span class="actual-date">{{ today | fechaFormal }}</span>
+    <a class="user-gestion" matButton [matMenuTriggerFor]="menu"> <span class="user-gestion">¿Deseas cambiar de organización?</span></a>
+    <mat-menu #menu="matMenu">
+      @for (org of organizations; track org.id) {
+        <button mat-menu-item (click)="changeOrganization(org.id)">
+          {{ org.display_name }}
+          @if( user?.['org_id'] === org.id) {
+            <mat-icon>check_circle</mat-icon>
+          }
+        </button>
+      }
+    </mat-menu>
+    <a class="user-gestion" (click)="logout()">
+      Cerrar sesión
+      <mat-icon class="logout-icon">logout</mat-icon>
+    </a>
+  </div>
+</mat-toolbar>
+
+<div class="custom-sidenav-container">
+  <nav class="custom-sidenav">
+    <ul>
+      @if (puedeVerBoton("read:organizations")){
+        <li>
+          <a [routerLink]="['/organizations']" routerLinkActive="active">
+            <mat-icon>group</mat-icon>
+            Mis usuarios
+          </a>
+        </li>
+      }
+      @if (puedeVerBoton("create:users")){
+        <li>
+          <a [routerLink]="['/permision']" routerLinkActive="active">
+            <mat-icon>person</mat-icon>
+            Permisos
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/create-users']" routerLinkActive="active">
+            <mat-icon>person_add</mat-icon>
+            Crear Usuario
+          </a>
+        </li>
+      }
+      <li>
+        <a [routerLink]="['/users']" routerLinkActive="active">
+          <mat-icon>group</mat-icon>
+          Usuarios
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <main class="custom-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
