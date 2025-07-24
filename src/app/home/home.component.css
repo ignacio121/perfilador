@@ -73,13 +73,11 @@
 }
 
 .login-button:active {
-  /* este reemplaza al incorrecto :pressed */
   background: #B7006F;
 }
 
 .login-button:focus {
   outline: 3px solid #006AFF;
-  /* línea azul al rededor */
   outline-offset: 2px;
 }
 

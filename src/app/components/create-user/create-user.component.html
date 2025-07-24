@@ -1,4 +1,54 @@
-<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button
+      class="tab"
+      (click)="verUserList()"
+    >
+      <mat-icon style="font-size: 14px; display: flex; align-items: center;">arrow_back</mat-icon>
+      Ir a Usuarios
+    </button>
+  </div>
+</div>
+
+<div>
+  <div class="info-container">
+    <h2>Crear usuario</h2>
+  <a class="text">
+    Crea y asigna permisos de acceso a la información. 💡Recuerda ingresar correctamente los datos para que podamos
+    comunicarnos y ayudarte con las dudas.
+  </a>
+  </div>
+  <div class="steps-container">
+    <div class="stepper">
+      <div class="step" [class.active]="currentStep === 1">
+        <div class="circle">1</div>
+        <div class="label">Ingresar datos</div>
+      </div>
+      <div class="line"></div>
+      <div class="step" [class.active]="currentStep === 2">
+        <div class="circle">2</div>
+        <div class="label">Asignar perfil</div>
+      </div>
+      <div class="line"></div>
+      <div class="step" [class.active]="currentStep === 3">
+        <div class="circle">3</div>
+        <div class="label">Seleccionar comercio</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contenido-tab">
+    @if (currentStep === 1) {
+      <h3>Hola que tal</h3>
+      <app-user-data/>
+    }
+
+    </div>
+
+</div>
+
+<div class="contenedor-principal">
+
   <form [formGroup]="userForm" (ngSubmit)="submitForm()" style="width: 100%; max-width: 400px;">
     <mat-card class="p-4 rounded-xl shadow-md">
       <mat-card-title class="text-xl font-semibold mb-4">Crear Usuario</mat-card-title>

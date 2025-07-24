@@ -1,0 +1,120 @@
+<p>user-data works!</p>
+
+<div class="header-step">
+  <div class="circle"> 1 </div>
+  <h2>Ingresa los datos del nuevo usuario</h2>
+</div>
+
+
+<div class="input-wrapper"
+     [class.filled]="value"
+     [class.disabled]="disabled"
+     [class.focused]="focused"
+     [class.hovered]="hovered">
+  <div class="label-row">
+    <label class="label">RUT persona</label>
+  </div>
+  <div class="input-container"
+       (focusin)="focused = true"
+       (focusout)="focused = false"
+       (mouseenter)="hovered = true"
+       (mouseleave)="hovered = false">
+    <input
+      matInput
+      [disabled]="disabled"
+      [readonly]="disabled"
+      placeholder="Ingresa RUT persona" />
+  </div>
+
+</div>
+
+<div class="input-wrapper"
+     [class.filled]="value"
+     [class.disabled]="disabled"
+     [class.focused]="focused"
+     [class.hovered]="hovered">
+  <div class="label-row">
+    <label class="label">Nombre</label>
+  </div>
+  <div class="input-container"
+       (focusin)="focused = true"
+       (focusout)="focused = false"
+       (mouseenter)="hovered = true"
+       (mouseleave)="hovered = false">
+    <input
+      matInput
+      [disabled]="disabled"
+      [readonly]="disabled"
+      placeholder="Ingresa el nombre" />
+  </div>
+
+</div>
+
+<div class="input-wrapper"
+     [class.filled]="value"
+     [class.disabled]="disabled"
+     [class.focused]="focused"
+     [class.hovered]="hovered">
+  <div class="label-row">
+    <label class="label">Apellidos</label>
+  </div>
+  <div class="input-container"
+       (focusin)="focused = true"
+       (focusout)="focused = false"
+       (mouseenter)="hovered = true"
+       (mouseleave)="hovered = false">
+    <input
+      matInput
+      [disabled]="disabled"
+      [readonly]="disabled"
+      placeholder="Ingresa los apellidos" />
+  </div>
+
+</div>
+
+<div class="input-wrapper"
+     [class.filled]="value"
+     [class.disabled]="disabled"
+     [class.focused]="focused"
+     [class.hovered]="hovered">
+  <div class="label-row">
+    <label class="label">Correo electrónico</label>
+    <span class="helper-top">
+      ¿Qué correo ingreso?<mat-icon>help</mat-icon>
+    </span>
+  </div>
+  <div class="input-container"
+       (focusin)="focused = true"
+       (focusout)="focused = false"
+       (mouseenter)="hovered = true"
+       (mouseleave)="hovered = false">
+    <input
+      matInput
+      [disabled]="disabled"
+      [readonly]="disabled"
+      placeholder="Ingresa correo electrónico" />
+  </div>
+
+</div>
+
+<div class="input-wrapper"
+     [class.filled]="value"
+     [class.disabled]="disabled"
+     [class.focused]="focused"
+     [class.hovered]="hovered">
+  <div class="label-row">
+    <label class="label">Confirmar correo electrónico</label>
+  </div>
+  <div class="input-container"
+       (focusin)="focused = true"
+       (focusout)="focused = false"
+       (mouseenter)="hovered = true"
+       (mouseleave)="hovered = false">
+    <input
+      matInput
+      [disabled]="disabled"
+      [readonly]="disabled"
+      placeholder="Ingresa correo electrónico" />
+  </div>
+
+</div>

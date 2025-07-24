@@ -2,6 +2,124 @@
   display: block;
 }
 
+.tabs-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+  width: 99%;
+  border-bottom: 1px solid #C9D0E4;
+}
+
+.tab {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 13px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #007EFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.info-container {
+  padding: 1rem;
+  padding-left: 2rem;
+}
+
+h2 {
+  font-family: Roboto;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.25px;
+  color: #2D3338;
+  margin-top: 1rem;
+  margin-bottom: 5px;
+}
+
+.text {
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #707382;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  text-align: center;
+}
+
+.steps-container {
+  border-top: 1px solid #C9D0E4;
+  border-bottom: 1px solid #C9D0E4;
+  margin-top: 1rem;
+  padding: 3rem 15rem;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+
+    .circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .label {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #999;
+    }
+
+    &.active {
+      .circle {
+        border-color: #D5006C;
+        color: #D5006C;
+      }
+
+      .label {
+        color: #D5006C;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #C9D0E4;
+    margin: 0 8px;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -9,4 +127,21 @@
   justify-content: center;
   height: 100vh;
   width: 100%;
+}
+
+.contenedor-principal {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+button[mat-stroked-button] {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: #007EFF;
 }

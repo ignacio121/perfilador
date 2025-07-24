@@ -26,7 +26,12 @@ export class OrganizationsService {
     return this.http.get<any>(this.apiUrl);
   }
 
-  getMembersOfOrganization(orgId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${orgId}/members`);
+  getMembersOfOrganization(orgId: string, filtroBusqueda: string, filtroEstado: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${orgId}/members`, {
+      params: {
+        search: filtroBusqueda || '',
+        blocked: filtroEstado || '',
+      }
+    });
   }
 }

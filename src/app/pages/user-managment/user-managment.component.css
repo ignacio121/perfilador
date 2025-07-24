@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.tabs-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+  width: 97%;
+  border-bottom: 1px solid #C9D0E4;
+  padding-top: 1rem;
+  padding-left: 1.5rem;
+}
+
+.tab {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+.tab.active {
+  color: #d5006c;
+  border-bottom: 3px solid #d5006c;
+}
+
+.contenido-tab{
+  padding: 1rem;
+  padding-left: 2rem;
+}

@@ -6,6 +6,13 @@
 /out-tsc
 /bazel-out
 
+tsconfig.*.json
+proxy.conf.json
+package*.json
+angular.json
+.editorconfig
+auth_config.json
+
 # Node
 /node_modules
 npm-debug.log
