@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UserCreateComponent } from '../../components/create-user/create-user.component';
-import { UserManagmentComponent } from "../user-managment/user-managment.component";
+import { UserCreateComponent } from '../create-user/create-user.component';
+import { UserManagmentComponent } from '../../components/user-managment/user-managment.component';
+
 
 @Component({
   selector: 'app-my-users',

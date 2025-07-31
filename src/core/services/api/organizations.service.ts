@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 export interface Organization {
   id: string;
+  name: string;
   display_name: string;
 }
 
@@ -15,23 +16,34 @@ export interface Members {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class OrganizationsService {
-  private apiUrl = '/api/organization';
+  private apiUrl = "/api/organization";
 
   constructor(private http: HttpClient) {}
 
   getOrganizationsOfUser(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(`${this.apiUrl}/me`);
   }
 
-  getMembersOfOrganization(orgId: string, filtroBusqueda: string, filtroEstado: string): Observable<any> {
+  getOrganizationsOfUserByName(user_id: string, name: string): Observable<any> {
+    const encodedUserId = encodeURIComponent(user_id);
+    return this.http.get<any>(
+      `${this.apiUrl}/find/me?userId=${encodedUserId}&name=${name}`
+    );
+  }
+
+  getMembersOfOrganization(
+    orgId: string,
+    filtroBusqueda: string,
+    filtroEstado: string
+  ): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${orgId}/members`, {
       params: {
-        search: filtroBusqueda || '',
-        blocked: filtroEstado || '',
-      }
+        search: filtroBusqueda || "",
+        blocked: filtroEstado || "",
+      },
     });
   }
 }

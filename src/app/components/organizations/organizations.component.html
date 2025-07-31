@@ -1,0 +1,59 @@
+<div class="header-step">
+  <div class="circle"> 3 </div>
+  <h2>Seleccionar códigos de comercio</h2>
+</div>
+
+<p class="text">¿Deseas dar acceso a <strong>{{nombreUsuario}}</strong>  a <strong>todos los códigos de comercio</strong> de {{orgDisplayName}}? </p>
+
+<div class="container-radios">
+  <label class="radio-container">
+    <input
+      type="radio"
+      name="perfil"
+      (change)="optionSelected = true"
+    />
+    <span class="custom-radio"></span>
+    Si
+  </label>
+
+  <label class="radio-container">
+    <input
+      type="radio"
+      name="perfil"
+      (change)="optionSelected = false"
+    />
+    <span class="custom-radio"></span>
+    No
+  </label>
+</div>
+
+@if(!optionSelected){
+  <p class="text">Selecciona los códigos de comercios a los que podrá acceder el usuario. </p>
+  <div class="filtros-busqueda">
+    <div class="input-container">
+      <div class="placeholder"> Comercios </div>
+      <input
+        type="text"
+        class="input"
+        [(ngModel)]="filtroBusqueda"
+        (change)="onFiltroCambiado()"
+        placeholder="Buscar..."
+      />
+    </div>
+    <button class="button-icon"  [disabled]="!buscarHabilitado">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  
+}
+
+
+<div class="buttons-container">
+  <button class="secundary-button" (click)="Atras()">
+    Atrás
+  </button>
+
+  <button class="button" >
+    FInalizar
+  </button>
+</div>

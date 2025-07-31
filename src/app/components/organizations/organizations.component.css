@@ -1,0 +1,257 @@
+:host {
+  display: block;
+}
+
+.header-step {
+  display: flex;
+  align-items: center;
+  padding-left: 1.5rem;
+  padding-top: .5rem;
+}
+
+.circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #D5006C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 14px;
+  background: #D5006C;
+}
+
+h2 {
+  font-family: Roboto;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.25px;
+  color: #2D3338;
+  margin-left: .5rem;
+}
+
+.text {
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.25px;
+  color: #707382;
+  padding-left: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.container-radios{
+  display: flex;
+  padding: 1.5rem 2.5rem;
+  gap: 20px;
+}
+
+.radio-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+
+/* Oculta el radio nativo */
+.radio-container input[type="radio"] {
+  display: none;
+}
+
+.custom-radio {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid #D5006C;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.radio-container input[type="radio"]:checked+.custom-radio::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #D5006C;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #D5006C;
+}
+
+.filtros-busqueda {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding-left: 2.5rem;
+}
+
+.placeholder {
+  font-family: Roboto;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.25px;
+  color: #2D3338;
+}
+
+.input {
+  width: 250px;
+  height: 48;
+  border-radius: 4px;
+  border: 1px solid #A9B1BF;
+  padding: 12px 16px 12px 16px;
+  background: #FFFFFF;
+  color: #2D3338;
+  font-size: 16px;
+  transition: border 0.2s, color 0.2s;
+  outline: none;
+}
+
+.input:hover {
+  border: 1px solid #707382;
+  color: #707382;
+}
+
+.input:focus {
+  border: 1.5px solid #007EFF;
+  color: #2D3338;
+}
+
+.button-icon {
+  width: 45px;
+  height: 45px;
+  background: #D5006C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.button-icon mat-icon {
+  font-size: 24px;
+}
+
+.button-icon:hover {
+  background: #E5397F;
+}
+
+.button-icon:active {
+  background: #B7006F;
+}
+
+.button-icon:focus {
+  outline: 3px solid #006AFF;
+  outline-offset: 2px;
+}
+
+.button-icon:disabled {
+  background: #E7EBF3;
+  color: #A0A0A0;
+  cursor: not-allowed;
+}
+
+.buttons-container {
+  display: flex;
+  margin-top: 16px;
+  gap: 16px;
+  padding-left: 1.5rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #D5006C;
+  color: white;
+  padding: 0 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s, outline 0.2s ease-in-out;
+  padding: 16px 32px;
+  margin-bottom: 32px;
+  margin-top: 16px;
+}
+
+.button:hover {
+  background: #E5397F;
+}
+
+.button:active {
+  background: #B7006F;
+}
+
+.button:focus {
+  outline: 3px solid #006AFF;
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  background: #E7EBF3;
+  color: #A0A0A0;
+  cursor: not-allowed;
+}
+
+.secundary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  color: #D5006C;
+  padding: 0 24px;
+  border: none;
+  border: 1px solid #D5006C;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s, outline 0.2s ease-in-out;
+  padding: 16px 32px;
+  margin-bottom: 32px;
+  margin-top: 16px;
+}
+
+.secundary-button:hover {
+  background: #D5006C0D;
+}
+
+.secundary-button:active {
+  background: #D5006C1A;
+}
+
+.secundary-button:focus {
+  outline: 3px solid #006AFF;
+  outline-offset: 2px;
+
+}
+
+.secundary-button:disabled {
+  background: #E7EBF3;
+  color: #A0A0A0;
+  cursor: not-allowed;
+}

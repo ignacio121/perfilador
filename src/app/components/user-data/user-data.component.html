@@ -1,120 +1,74 @@
-<p>user-data works!</p>
-
 <div class="header-step">
   <div class="circle"> 1 </div>
   <h2>Ingresa los datos del nuevo usuario</h2>
 </div>
 
-
-<div class="input-wrapper"
-     [class.filled]="value"
-     [class.disabled]="disabled"
-     [class.focused]="focused"
-     [class.hovered]="hovered">
-  <div class="label-row">
-    <label class="label">RUT persona</label>
-  </div>
-  <div class="input-container"
-       (focusin)="focused = true"
-       (focusout)="focused = false"
-       (mouseenter)="hovered = true"
-       (mouseleave)="hovered = false">
-    <input
-      matInput
-      [disabled]="disabled"
-      [readonly]="disabled"
-      placeholder="Ingresa RUT persona" />
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
+  <div class="input-wrapper" [class.filled]="userForm.get('username')?.value" [class.hovered]="input1.hovered" [class.focused]="input1.focused">
+    <div class="label-row">
+      <label class="label">RUT persona</label>
+    </div>
+    <div class="input-container" (focusin)="input1.focused = true" (focusout)="input1.focused = false"
+      (mouseenter)="input1.hovered = true" (mouseleave)="input1.hovered = false">
+      <input matInput formControlName="username" placeholder="Ingresa RUT persona" />
+    </div>
   </div>
 
-</div>
-
-<div class="input-wrapper"
-     [class.filled]="value"
-     [class.disabled]="disabled"
-     [class.focused]="focused"
-     [class.hovered]="hovered">
-  <div class="label-row">
-    <label class="label">Nombre</label>
-  </div>
-  <div class="input-container"
-       (focusin)="focused = true"
-       (focusout)="focused = false"
-       (mouseenter)="hovered = true"
-       (mouseleave)="hovered = false">
-    <input
-      matInput
-      [disabled]="disabled"
-      [readonly]="disabled"
-      placeholder="Ingresa el nombre" />
+  <div class="input-wrapper" [class.filled]="userForm.get('given_name')?.value" [class.hovered]="input2.hovered" [class.focused]="input2.focused">
+    <div class="label-row">
+      <label class="label">Nombre</label>
+    </div>
+    <div class="input-container" (focusin)="input2.focused = true" (focusout)="input2.focused = false"
+      (mouseenter)="input2.hovered = true" (mouseleave)="input2.hovered = false">
+      <input matInput formControlName="given_name" name="nombre" placeholder="Ingresa el nombre"/>
+    </div>
   </div>
 
-</div>
-
-<div class="input-wrapper"
-     [class.filled]="value"
-     [class.disabled]="disabled"
-     [class.focused]="focused"
-     [class.hovered]="hovered">
-  <div class="label-row">
-    <label class="label">Apellidos</label>
-  </div>
-  <div class="input-container"
-       (focusin)="focused = true"
-       (focusout)="focused = false"
-       (mouseenter)="hovered = true"
-       (mouseleave)="hovered = false">
-    <input
-      matInput
-      [disabled]="disabled"
-      [readonly]="disabled"
-      placeholder="Ingresa los apellidos" />
+  <div class="input-wrapper" [class.filled]="userForm.get('family_name')?.value" [class.hovered]="input3.hovered" [class.focused]="input3.focused">
+    <div class="label-row">
+      <label class="label">Apellidos</label>
+    </div>
+    <div class="input-container" (focusin)="input3.focused = true" (focusout)="input3.focused = false"
+      (mouseenter)="input3.hovered = true" (mouseleave)="input3.hovered = false">
+      <input matInput formControlName="family_name" name="apellidos" placeholder="Ingresa los apellidos" />
+    </div>
   </div>
 
-</div>
-
-<div class="input-wrapper"
-     [class.filled]="value"
-     [class.disabled]="disabled"
-     [class.focused]="focused"
-     [class.hovered]="hovered">
-  <div class="label-row">
-    <label class="label">Correo electrónico</label>
-    <span class="helper-top">
-      ¿Qué correo ingreso?<mat-icon>help</mat-icon>
-    </span>
-  </div>
-  <div class="input-container"
-       (focusin)="focused = true"
-       (focusout)="focused = false"
-       (mouseenter)="hovered = true"
-       (mouseleave)="hovered = false">
-    <input
-      matInput
-      [disabled]="disabled"
-      [readonly]="disabled"
-      placeholder="Ingresa correo electrónico" />
+  <div class="input-wrapper" [class.filled]="userForm.get('email')?.value" [class.hovered]="input4.hovered" [class.focused]="input4.focused">
+    <div class="label-row">
+      <label class="label">Correo electrónico</label>
+    </div>
+    <div class="input-container" (focusin)="input4.focused = true" (focusout)="input4.focused = false"
+      (mouseenter)="input4.hovered = true" (mouseleave)="input4.hovered = false">
+      <input matInput formControlName="email" name="correo" placeholder="Ingresa correo electrónico"/>
+    </div>
   </div>
 
-</div>
-
-<div class="input-wrapper"
-     [class.filled]="value"
-     [class.disabled]="disabled"
-     [class.focused]="focused"
-     [class.hovered]="hovered">
-  <div class="label-row">
-    <label class="label">Confirmar correo electrónico</label>
-  </div>
-  <div class="input-container"
-       (focusin)="focused = true"
-       (focusout)="focused = false"
-       (mouseenter)="hovered = true"
-       (mouseleave)="hovered = false">
-    <input
-      matInput
-      [disabled]="disabled"
-      [readonly]="disabled"
-      placeholder="Ingresa correo electrónico" />
+  <div class="input-wrapper" [class.filled]="userForm.get('confirm_email')?.value" [class.focused]="input5.focused" [class.hovered]="input5.hovered">
+    <div class="label-row">
+      <label class="label">Confirmar correo electrónico</label>
+    </div>
+    <div class="input-container" (focusin)="input5.focused = true" (focusout)="input5.focused = false"
+      (mouseenter)="input5.hovered = true" (mouseleave)="input5.hovered = false">
+      <input matInput formControlName="confirm_email" name="confirmarCorreo" placeholder="Ingresa correo electrónico" />
+    </div>
   </div>
 
-</div>
+  <div class="input-wrapper" [class.filled]="userForm.get('phone')?.value" [class.focused]="input6.focused" [class.hovered]="input6.hovered">
+    <div class="label-row">
+      <label class="label">Teléfono</label>
+    </div>
+    <div class="input-container" (focusin)="input6.focused = true" (focusout)="input6.focused = false"
+      (mouseenter)="input6.hovered = true" (mouseleave)="input6.hovered = false">
+      <p>+56</p>
+      <input matInput formControlName="phone" placeholder="111111111" />
+    </div>
+  </div>
+
+  <button class="button" onsubmit="" [disabled]="!completData">
+    Siguiente
+  </button>
+
+  
+</form>
+

@@ -18,7 +18,6 @@ import { FormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PermissionsService } from '../../../core/services/api/permision.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from '@angular/material/select';
 import { MatIcon } from '@angular/material/icon';
 import { EventEmitter, Output } from '@angular/core'
@@ -32,9 +31,7 @@ import { EventEmitter, Output } from '@angular/core'
     MatProgressSpinnerModule,
     MatSlideToggleModule,
     CommonModule,
-    MatInputModule,
     FormsModule,
-    MatInputModule,
     MatSelectModule,
     MatIcon,
   ],

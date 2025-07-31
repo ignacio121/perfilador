@@ -1,0 +1,88 @@
+<div class="header-step">
+  <div class="circle"> 2 </div>
+  <h2>Asignar perfil</h2>
+</div>
+
+<p class="text">Selecciona el perfil que tendrá <strong>{{nombreUsuario}}</strong> </p>
+
+<div class="perfiles-container">
+  <div class="perfil-card" [class.active]="perfilSeleccionado() === 'basico'" (click)="perfilSeleccionado.set('basico')">
+    <label class="radio-container">
+      <input
+        type="radio"
+        name="perfil"
+        [checked]="perfilSeleccionado() === 'basico'"
+        (change)="perfilSeleccionado.set('basico')"
+      />
+      <span class="custom-radio"></span>
+    </label>
+    <h3>Básico</h3>
+    <p class="text-card"> Este perfil tiene acceso a los siguientes módulos:</p>
+    <div class="group-checkbox">
+      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Informes de ventas </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Facturación </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Solicitudes </mat-checkbox>
+    </div>
+  </div>
+
+  <div class="perfil-card" [class.active]="perfilSeleccionado() === 'avanzado'" (click)="perfilSeleccionado.set('avanzado')">
+    <label class="radio-container">
+      <input
+        type="radio"
+        name="perfil"
+        [checked]="perfilSeleccionado() === 'avanzado'"
+        (change)="perfilSeleccionado.set('avanzado')"
+      />
+      <span class="custom-radio"></span>
+    </label>
+    <h3>Avanzado</h3>
+    <p class="text-card"> Este perfil tiene acceso a los siguientes módulos:</p>
+    <div class="group-checkbox">
+      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Informes de ventas </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Facturación </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Solicitudes </mat-checkbox>
+    </div>
+    <p class="advanced-permissions">Permisos avanzados</p>
+    <div class="group-checkbox">
+      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Anular ventas </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Resolución de contracargos </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Reportes estratégicos </mat-checkbox>
+    </div>
+  </div>
+
+  <div class="perfil-card" [class.active]="perfilSeleccionado() === 'personalizado'" (click)="perfilSeleccionado.set('personalizado')">
+    <label class="radio-container">
+      <input
+        type="radio"
+        name="perfil"
+        [checked]="perfilSeleccionado() === 'personalizado'"
+        (change)="perfilSeleccionado.set('personalizado')"
+      />  
+      <span class="custom-radio"></span>
+    </label>
+    <h3>Personalizado</h3>
+    <p class="text-card"> Selecciona los permisos que deseas asignar:</p>
+    <div class="group-checkbox">
+      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Informes de ventas </mat-checkbox>
+      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Facturación </mat-checkbox>
+      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Solicitudes </mat-checkbox>
+    </div>
+    <p class="advanced-permissions">Permisos avanzados</p>
+    <div class="group-checkbox">
+      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Anular ventas </mat-checkbox>
+      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Resolución de contracargos </mat-checkbox>
+      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Reportes estratégicos </mat-checkbox>
+    </div>
+  </div>
+</div>
+
+<div class="buttons-container">
+  <button class="secundary-button" (click)="Atras()">
+    Atrás
+  </button>
+
+  <button class="button" [disabled]="!perfilValido()" (click)="guardarPerfil()">
+    Siguiente
+  </button>
+</div>
+

@@ -13,6 +13,7 @@ import { PermissionsService } from '../../../core/services/api/permision.service
 import { UserService } from '../../../core/services/api/users.service';
 import { FechaFormalPipe } from "../../pipes/fecha-formal-pipe";
 import { DomSanitizer } from '@angular/platform-browser';
+import { AppStateService } from '../../../core/services/api/app-state.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -48,7 +49,8 @@ export class MainLayoutComponent {
     private orgService: OrganizationsService,
     private cdr: ChangeDetectorRef,
     private userService: UserService,
-    private permissionsService: PermissionsService
+    private permissionsService: PermissionsService,
+    private appState: AppStateService,
   ) {
     iconRegistry.addSvgIcon(
       'log-out',
@@ -70,8 +72,9 @@ export class MainLayoutComponent {
     });
 
     this.auth.user$.subscribe((user) => {
-      this.user = user ?? null;
+      this.user = user ?? null;      
       if (this.user) {
+        this.appState.setUserId(user?.sub || "");
         this.cargarUsuario();
       }
     });
@@ -85,7 +88,11 @@ export class MainLayoutComponent {
       const org = this.organizations.find(
         (o) => o.id === this.user?.['org_id']
       );
-      this.org_name = org?.display_name ?? '';
+      if (org) {
+        this.appState.setOrganization(org.id, org.name, org.display_name);
+        this.org_name = org.display_name; // si aún lo necesitas en ese componente
+      }
+
     });
     this.cdr.detectChanges();
   }

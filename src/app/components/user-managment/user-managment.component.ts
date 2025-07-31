@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserListComponent } from "../user-list/user-list.component";
-import { ProfilesComponent } from "../profiles/profiles.component";
+
 import { EventEmitter, Output } from '@angular/core';
+import { ProfilesComponent } from '../../pages/profiles/profiles.component';
 
 @Component({
   selector: 'app-user-managment',

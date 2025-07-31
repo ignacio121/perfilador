@@ -1,0 +1,53 @@
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button
+      class="tab"
+      (click)="verUserList()"
+    >
+      <mat-icon style="font-size: 14px; display: flex; align-items: center;">arrow_back</mat-icon>
+      Ir a Usuarios
+    </button>
+  </div>
+</div>
+
+<div>
+  <div class="info-container">
+    <h2>Crear usuario</h2>
+  <a class="text">
+    Crea y asigna permisos de acceso a la información. 💡Recuerda ingresar correctamente los datos para que podamos
+    comunicarnos y ayudarte con las dudas.
+  </a>
+  </div>
+  <div class="steps-container">
+    <div class="stepper">
+      <div class="step" [class.active]="currentStep === 1">
+        <div class="circle">1</div>
+        <div class="label">Ingresar datos</div>
+      </div>
+      <div class="line"></div>
+      <div class="step" [class.active]="currentStep === 2">
+        <div class="circle">2</div>
+        <div class="label">Asignar perfil</div>
+      </div>
+      <div class="line"></div>
+      <div class="step" [class.active]="currentStep === 3">
+        <div class="circle">3</div>
+        <div class="label">Seleccionar comercio</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contenido-tab">
+    @if (currentStep === 1) {
+      <app-user-data (stepCompleted)="onUserDataReceived($event)" />
+    }
+    @if (currentStep === 2) {
+      <app-profiles (backStep)="retrocederStep()" (stepCompleted)="avanzarStep()" />
+    }
+    @if(currentStep === 3){
+      <app-organizations (backStep)="retrocederStep()" (stepCompleted)="avanzarStep()" />
+    }
+
+  </div>
+
+</div>
