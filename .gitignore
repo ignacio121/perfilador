@@ -8,7 +8,6 @@
 
 package-lock.json
 .editorconfig
-auth_config.json
 
 # Node
 /node_modules
