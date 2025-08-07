@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+body {
+  background-color: #009fe3;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.onepay-container {
+  background-color: #fff;
+  width: 360px;
+  height: 50%;
+  margin: 40px auto;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.onepay-container img {
+  display: block;
+  margin: 0 auto 24px auto;
+  width: 80px;
+}
+
+.onepay-logo {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.onepay-logo img {
+  width: 80px;
+}
+
+.user-info {
+  font-size: 0.95rem;
+  line-height: 1.2;
+  color: #43484C;
+}
+
+.user-gestion {
+  font-size: 0.92rem;
+  color: #007EFF;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  line-height: 1.5;
+  cursor: pointer;
+  margin-top: 50px;
+}

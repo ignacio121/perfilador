@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Input,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import {
   Members,
@@ -24,7 +26,7 @@ import { EventEmitter, Output } from '@angular/core'
 
 
 @Component({
-  selector: 'app-user-list',
+  selector: "app-user-list",
   imports: [
     MatTableModule,
     MatExpansionModule,
@@ -36,24 +38,32 @@ import { EventEmitter, Output } from '@angular/core'
     MatIcon,
   ],
   standalone: true,
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css',
+  templateUrl: "./user-list.component.html",
+  styleUrl: "./user-list.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListComponent implements OnInit {
+  @Input() usuarioCreado: boolean = false;
   members: Members[] | null = null;
   user: User | null = null;
-  displayedColumns = ['name', 'rut', 'state', 'blocked'];
+  displayedColumns = [
+    "name",
+    "rut",
+    "state",
+    "blocked",
+    "edit",
+    "activeMfa",
+  ];
 
   expandedUserId: string | null = null;
   detallesUsuario: any = null;
-  allColumns = [...this.displayedColumns, 'expandedDetail'];
+  allColumns = [...this.displayedColumns, "expandedDetail"];
 
   cargandoDetalle = false;
   cargandoDetalleId: string | null = null;
 
-  filtroBusqueda: string = '';
-  filtroEstado: string = '';
+  filtroBusqueda: string = "";
+  filtroEstado: string = "";
 
   buscarHabilitado: boolean = false;
 
@@ -74,10 +84,10 @@ export class UserListComponent implements OnInit {
     this.auth.user$.subscribe((user) => {
       this.user = user ?? null;
 
-      if (this.user?.['org_id']) {
+      if (this.user?.["org_id"]) {
         this.orgService
           .getMembersOfOrganization(
-            this.user['org_id'],
+            this.user["org_id"],
             this.filtroBusqueda,
             this.filtroEstado
           )
@@ -88,6 +98,15 @@ export class UserListComponent implements OnInit {
           });
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes["usuarioCreado"]?.currentValue) {
+      setTimeout(() => {
+        this.usuarioCreado = false;
+        this.cdr.markForCheck(); // si usas OnPush
+      }, 3000);
+    }
   }
 
   verDetalle(userId: string) {
@@ -106,7 +125,7 @@ export class UserListComponent implements OnInit {
     this.cdr.markForCheck();
 
     this.userService
-      .getUserById(userId, this.user?.['org_id'])
+      .getUserById(userId, this.user?.["org_id"])
       .subscribe((data) => {
         this.detallesUsuario = data;
         this.cargandoDetalleId = null;
@@ -121,69 +140,69 @@ export class UserListComponent implements OnInit {
   onToggleBloqueo(user: Users, event: any) {
     console.log(user);
     if (event.checked) {
-      console.log('aa');
+      console.log("aa");
       this.bloquear(user);
     } else {
-      console.log('bb');
+      console.log("bb");
       this.desbloquear(user);
     }
   }
 
   bloquear(user: Users) {
-    const [provider, user_id] = user.user_id.split('|');
+    const [provider, user_id] = user.user_id.split("|");
     const identity = user.identities?.[0];
     this.userService
       .bloquearUsuario(
         `${provider}%7C${user_id}`,
         true,
-        'Usuario bloqueado por no cumplir con las normas corporativas.'
+        "Usuario bloqueado por no cumplir con las normas corporativas."
       )
       .subscribe({
         next: () => {
           user.blocked = true; // 👈 actualizamos en el array actual
-          this.mostrarMensaje('Usuario bloqueado exitosamente');
+          this.mostrarMensaje("Usuario bloqueado exitosamente");
           this.cdr.markForCheck();
         },
       });
   }
 
   desbloquear(user: Users) {
-    const [provider, user_id] = user.user_id.split('|');
+    const [provider, user_id] = user.user_id.split("|");
     const identity = user.identities?.[0];
     this.userService
-      .bloquearUsuario(`${provider}%7C${user_id}`, false, '')
+      .bloquearUsuario(`${provider}%7C${user_id}`, false, "")
       .subscribe({
         next: () => {
           user.blocked = false; // 👈 también aquí
-          this.mostrarMensaje('Usuario desbloqueado exitosamente');
+          this.mostrarMensaje("Usuario desbloqueado exitosamente");
           this.cdr.markForCheck();
         },
       });
   }
 
   mostrarMensaje(mensaje: string) {
-    this.snackBar.open(mensaje, 'Cerrar', {
+    this.snackBar.open(mensaje, "Cerrar", {
       duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
+      horizontalPosition: "center",
+      verticalPosition: "bottom",
     });
   }
 
   onFiltroCambiado() {
     this.buscarHabilitado =
-      (!!this.filtroBusqueda && this.filtroBusqueda.trim() !== '') ||
-      (!!this.filtroEstado && this.filtroEstado !== '');
+      (!!this.filtroBusqueda && this.filtroBusqueda.trim() !== "") ||
+      (!!this.filtroEstado && this.filtroEstado !== "");
   }
 
   filtrarUsuarios() {
     // Puedes hacer la lógica que desees aquí o delegar a un servicio:
-    console.log('Buscar:', this.filtroBusqueda, 'Estado:', this.filtroEstado);
+    console.log("Buscar:", this.filtroBusqueda, "Estado:", this.filtroEstado);
 
     this.orgService
       .getMembersOfOrganization(
-        this.user?.['org_id'],
+        this.user?.["org_id"],
         this.filtroBusqueda,
-        this.filtroEstado === 'all' ? '' : this.filtroEstado
+        this.filtroEstado === "all" ? "" : this.filtroEstado
       )
       .subscribe((members) => {
         this.members = members;
@@ -191,9 +210,23 @@ export class UserListComponent implements OnInit {
       });
   }
 
+  activeMFA(user_id: string) {
+    this.userService.activateMFA(user_id).subscribe({
+      next: () => {
+        this.mostrarMensaje("MFA activado exitosamente");
+      },
+    });
+  }
+
   @Output() crearUsuario = new EventEmitter<void>();
 
-  abrirModalCrearUsuario() {
+  abrirCrearUsuario() {
     this.crearUsuario.emit();
+  }
+
+  @Output() editarUsuario = new EventEmitter<void>();
+
+  abrirEditarUsuario() {
+    this.editarUsuario.emit();
   }
 }

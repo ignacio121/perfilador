@@ -1,0 +1,141 @@
+:host {
+  display: block;
+}
+
+.tabs-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+  width: 99%;
+  border-bottom: 1px solid #C9D0E4;
+}
+
+.tab {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 13px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #007EFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.info-container {
+  padding: 1rem;
+  padding-left: 2.7rem;
+}
+
+h2 {
+  font-family: Roboto;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.25px;
+  color: #2D3338;
+  margin-top: 1rem;
+  margin-bottom: 1.3rem;
+}
+
+.text {
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #707382;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  text-align: center;
+}
+
+.options {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid #C9D0E4;
+}
+
+.option {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-bottom: 1px solid #C9D0E4;
+}
+
+.header-step {
+  display: flex;
+  align-items: center;
+  padding-left: 1.5rem;
+  padding-top: .5rem;
+}
+
+.circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #D5006C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 14px;
+  background: #D5006C;
+}
+
+h2 {
+  font-family: Roboto;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.25px;
+  color: #2D3338;
+  margin-left: .5rem;
+}
+
+.deletes-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deletes {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+  width: 99%;
+  border-bottom: 1px solid #C9D0E4;
+  justify-content: flex-end;
+}
+
+.delete {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 13px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #007EFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}

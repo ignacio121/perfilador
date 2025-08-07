@@ -156,6 +156,53 @@ h3{
   margin-bottom: .5rem;
 }
 
+::ng-deep .custom-checkbox.mat-mdc-checkbox .mdc-checkbox__background {
+  border-color: #D5006C !important;
+  background-color: transparent !important;
+}
+
+::ng-deep .custom-checkbox.mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background {
+  background-color: #d5006a04 !important;
+  border-color: #D5006C !important;
+}
+
+::ng-deep .custom-checkbox.mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__checkmark-path {
+  stroke: #D5006C !important;
+}
+
+::ng-deep .custom-checkbox .mdc-checkbox__ripple {
+  background-color: #D5006C1A !important;
+}
+
+/* Estado base: deshabilitado sin check */
+::ng-deep .custom-checkbox.mat-mdc-checkbox.mat-mdc-checkbox-disabled .mdc-checkbox__background {
+  background-color: #f0f0f0 !important;
+  border-color: #ccc !important;
+}
+
+/* Estado: deshabilitado y marcado (checked + disabled) */
+::ng-deep .custom-checkbox.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-checked .mdc-checkbox__background {
+  background-color: white !important;
+  /* fondo más gris */
+  border-color: #A0AFCA !important;
+}
+
+/* Check (✓) en gris claro */
+::ng-deep .custom-checkbox.mat-mdc-checkbox.mat-mdc-checkbox-disabled.mat-mdc-checkbox-checked .mdc-checkbox__checkmark-path {
+  stroke: #A0AFCA !important;
+  opacity: 0.6 !important;
+}
+
+/* Texto del label cuando está deshabilitado */
+::ng-deep .custom-checkbox.mat-mdc-checkbox-disabled .mdc-label {
+  color: #A0A0A0 !important;
+}
+
+/* Elimina el ripple en estado deshabilitado */
+::ng-deep .custom-checkbox.mat-mdc-checkbox-disabled .mdc-checkbox__ripple {
+  background: transparent !important;
+}
+
 .advanced-permissions {
   font-family: Roboto;
   font-weight: 700;

@@ -19,9 +19,9 @@
     <h3>Básico</h3>
     <p class="text-card"> Este perfil tiene acceso a los siguientes módulos:</p>
     <div class="group-checkbox">
-      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Informes de ventas </mat-checkbox>
-      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Facturación </mat-checkbox>
-      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Solicitudes </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" class="custom-checkbox"> Información de ventas y abonos </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" class="custom-checkbox"> Reportes y facturas </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" class="custom-checkbox"> Solicitudes </mat-checkbox>
     </div>
   </div>
 
@@ -38,16 +38,27 @@
     <h3>Avanzado</h3>
     <p class="text-card"> Este perfil tiene acceso a los siguientes módulos:</p>
     <div class="group-checkbox">
-      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Informes de ventas </mat-checkbox>
-      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Facturación </mat-checkbox>
-      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Solicitudes </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" class="custom-checkbox"> Información de ventas y abonos </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" class="custom-checkbox"> Reportes y facturas </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" class="custom-checkbox"> Solicitudes </mat-checkbox>
     </div>
     <p class="advanced-permissions">Permisos avanzados</p>
     <div class="group-checkbox">
-      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Anular ventas </mat-checkbox>
-      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Resolución de contracargos </mat-checkbox>
-      <mat-checkbox [checked]="true" [disabled]="true" style="border-bottom: 1px solid #E7EBF3;"> Reportes estratégicos </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" class="custom-checkbox"> Anular ventas </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" class="custom-checkbox"> Resolución de contracargos </mat-checkbox>
+      <mat-checkbox [checked]="true" [disabled]="true" class="custom-checkbox"> Reportes estratégicos </mat-checkbox>
     </div>
+
+    <p class="advanced-permissions">Administrador de usuarios</p>
+    <mat-checkbox
+      [checked]="adminSeleccionado().active && adminSeleccionado().perfil === 'avanzado'"
+      (change)="onToggleAdmin($event.checked)"
+      class="custom-checkbox"
+    >
+      Administrador de usuarios
+    </mat-checkbox>
+
+
   </div>
 
   <div class="perfil-card" [class.active]="perfilSeleccionado() === 'personalizado'" (click)="perfilSeleccionado.set('personalizado')">
@@ -63,16 +74,38 @@
     <h3>Personalizado</h3>
     <p class="text-card"> Selecciona los permisos que deseas asignar:</p>
     <div class="group-checkbox">
-      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Informes de ventas </mat-checkbox>
-      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Facturación </mat-checkbox>
-      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Solicitudes </mat-checkbox>
+      @for (permiso of subpermisosBasicos; track permiso) {
+        <mat-checkbox
+          [checked]="subpermisosSeleccionados().includes(permiso)"
+          (change)="toggleSubpermiso(permiso)"
+          class="custom-checkbox">
+          {{ mapPermisoLegible(permiso) }}
+        </mat-checkbox>
+      }
     </div>
+    
     <p class="advanced-permissions">Permisos avanzados</p>
     <div class="group-checkbox">
-      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Anular ventas </mat-checkbox>
-      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Resolución de contracargos </mat-checkbox>
-      <mat-checkbox style="border-bottom: 1px solid #E7EBF3;"> Reportes estratégicos </mat-checkbox>
+      @for (permiso of subpermisosAvanzados; track permiso) {
+        <mat-checkbox
+          [checked]="subpermisosSeleccionados().includes(permiso)"
+          (change)="toggleSubpermiso(permiso)"
+          class="custom-checkbox">
+          {{ mapPermisoLegible(permiso) }}
+        </mat-checkbox>
+      }
     </div>
+    
+    <p class="advanced-permissions">Administrador de usuarios</p> 
+    <mat-checkbox
+      [checked]="adminSeleccionado().active && adminSeleccionado().perfil === 'personalizado'"
+      (change)="onToggleAdmin($event.checked)"
+      class="custom-checkbox"
+    >
+      Administrador de usuarios
+    </mat-checkbox>
+
+
   </div>
 </div>
 

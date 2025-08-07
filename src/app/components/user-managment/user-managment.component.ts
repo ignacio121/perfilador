@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { UserListComponent } from "../user-list/user-list.component";
 
 import { EventEmitter, Output } from '@angular/core';
 import { ProfilesComponent } from '../../pages/profiles/profiles.component';
 
 @Component({
-  selector: 'app-user-managment',
+  selector: "app-user-managment",
   imports: [UserListComponent, ProfilesComponent],
   template: `
     <div class="tabs-wrapper">
@@ -29,18 +29,25 @@ import { ProfilesComponent } from '../../pages/profiles/profiles.component';
 
     <div class="contenido-tab">
       @if (vista === 'usuarios') {
-      <app-user-list (crearUsuario)="crearUsuario.emit()" />
-      } @if (vista === 'perfiles') {
+      <app-user-list
+        (editarUsuario)="editarUsuario.emit()"
+        (crearUsuario)="crearUsuario.emit()"
+        [usuarioCreado]="usuarioCreado"
+      />
+      }@if (vista === 'perfiles') {
       <app-profiles (verUsuarios)="verUsuarios.emit()" />
-      }
+      } 
     </div>
   `,
-  styleUrl: './user-managment.component.css',
+  styleUrl: "./user-managment.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserManagmentComponent {
-  vista: 'usuarios' | 'perfiles' = 'usuarios';
+  vista: "usuarios" | "perfiles" = "usuarios";
 
   @Output() crearUsuario = new EventEmitter<void>();
+  @Output() editarUsuario = new EventEmitter<void>();
   @Output() verUsuarios = new EventEmitter<void>();
+
+  @Input() usuarioCreado: boolean = false;
 }

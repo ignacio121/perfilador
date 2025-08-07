@@ -15,7 +15,9 @@
 
   <div style="display: flex; align-items: center; gap: 1rem;">
     <span class="actual-date">{{ today | fechaFormal }}</span>
-    <a class="user-gestion" matButton [matMenuTriggerFor]="menu"> <span class="user-gestion">¿Deseas cambiar de organización?</span></a>
+    @if(!puedeVerBoton("internal_user")){
+      <a class="user-gestion" matButton [matMenuTriggerFor]="menu"> <span class="user-gestion">¿Deseas cambiar de organización?</span></a>
+    }
     <mat-menu #menu="matMenu">
       @for (org of organizations; track org.id) {
         <button mat-menu-item (click)="changeOrganization(org.id)">
@@ -36,34 +38,63 @@
 <div class="custom-sidenav-container">
   <nav class="custom-sidenav">
     <ul>
-      @if (puedeVerBoton("read:organizations")){
+      @if (puedeVerBoton("read:organizations") && puedeVerBoton("create:users") && !puedeVerBoton("internal_user")){
         <li>
           <a [routerLink]="['/my-users']" routerLinkActive="active">
             <mat-icon>group</mat-icon>
             Mis usuarios
           </a>
         </li>
-      }
-      @if (puedeVerBoton("create:users")){
+      } @if(puedeVerBoton("internal_user")){
         <li>
-          <a [routerLink]="['/permision']" routerLinkActive="active">
-            <mat-icon>person</mat-icon>
-            Permisos
+          <a [routerLink]="['/users']" routerLinkActive="active">
+            <mat-icon>group</mat-icon>
+            Usuarios
           </a>
         </li>
+      } @if(puedeVerBoton("read:informe_ventas")){
         <li>
-          <a [routerLink]="['/create-users']" routerLinkActive="active">
-            <mat-icon>person_add</mat-icon>
-            Crear Usuario
+          <a >
+            <mat-icon>monetization_on</mat-icon>
+            Información de ventas y abonos
+          </a>
+        </li>
+      } @if(puedeVerBoton("read:facturacion")){
+        <li>
+          <a >
+            <mat-icon>receipt_long</mat-icon>
+            Reportes y facturas
+          </a>
+        </li>
+      } @if(puedeVerBoton("read:solicitudes")){
+        <li>
+          <a >
+            <mat-icon>assignment</mat-icon>
+            Solicitudes
+          </a>
+        </li>
+      } @if(puedeVerBoton("read:anulaciones")){
+        <li>
+          <a >
+            <mat-icon>cancel</mat-icon> 
+            Anular ventas
+          </a>
+        </li>
+      } @if(puedeVerBoton("read:contracargos")){
+        <li>
+          <a >
+            <mat-icon>gavel</mat-icon>
+            Resolución de contracargos
+          </a>
+        </li>
+      } @if(puedeVerBoton("read:rep_estrategicos")){
+        <li>
+          <a >
+            <mat-icon>insights</mat-icon>
+            Reportes estratégicos
           </a>
         </li>
       }
-      <li>
-        <a [routerLink]="['/users']" routerLinkActive="active">
-          <mat-icon>group</mat-icon>
-          Usuarios
-        </a>
-      </li>
     </ul>
   </nav>
   <main class="custom-content">

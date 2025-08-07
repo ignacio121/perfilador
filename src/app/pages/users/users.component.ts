@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output, type OnInit } from '@angular/core';
 import { Users, UserService } from '../../../core/services/api/users.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { PasswordService } from '../../../core/services/api/password.service';
@@ -9,9 +9,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { PermissionsService } from '../../../core/services/api/permision.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-users',
+  selector: "app-users",
   imports: [
     MatIconModule,
     MatPaginatorModule,
@@ -19,9 +21,11 @@ import { MatTableModule } from '@angular/material/table';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTableModule,
+    CommonModule,
+    FormsModule,
   ],
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.css',
+  templateUrl: "./users.component.html",
+  styleUrl: "./users.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersComponent implements OnInit {
@@ -35,7 +39,17 @@ export class UsersComponent implements OnInit {
   expandedUserId: string | null = null;
   cargandoDetalleId: string | null = null;
 
-  displayedColumns = ['name', 'email', 'email_verified', 'blocked', 'reset'];
+  displayedColumns = ["name", "email", "email_verified", "blocked", "reset"];
+
+  buscarHabilitado: boolean = false;
+  filtroBusqueda: string = "";
+  filtroEstado: string = "";
+
+  onFiltroCambiado() {
+    this.buscarHabilitado =
+      (!!this.filtroBusqueda && this.filtroBusqueda.trim() !== "") ||
+      (!!this.filtroEstado && this.filtroEstado !== "");
+  }
 
   constructor(
     private auth: AuthService,
@@ -93,12 +107,12 @@ export class UsersComponent implements OnInit {
       .bloquearUsuario(
         `${identity.provider}%7C${identity.user_id}`,
         true,
-        'Usuario bloqueado por no cumplir con las normas corporativas.'
+        "Usuario bloqueado por no cumplir con las normas corporativas."
       )
       .subscribe({
         next: () => {
           user.blocked = true; // 👈 actualizamos en el array actual
-          this.mostrarMensaje('Usuario bloqueado exitosamente');
+          this.mostrarMensaje("Usuario bloqueado exitosamente");
           this.cdr.markForCheck();
         },
       });
@@ -107,11 +121,11 @@ export class UsersComponent implements OnInit {
   desbloquear(user: Users) {
     const identity = user.identities?.[0];
     this.userService
-      .bloquearUsuario(`${identity.provider}%7C${identity.user_id}`, false, '')
+      .bloquearUsuario(`${identity.provider}%7C${identity.user_id}`, false, "")
       .subscribe({
         next: () => {
           user.blocked = false; // 👈 también aquí
-          this.mostrarMensaje('Usuario desbloqueado exitosamente');
+          this.mostrarMensaje("Usuario desbloqueado exitosamente");
           this.cdr.markForCheck();
         },
       });
@@ -120,20 +134,20 @@ export class UsersComponent implements OnInit {
   cambiarPassword(email: string) {
     this.passwordService.solicitarCambioPassword(email).subscribe({
       next: (resp) => {
-        this.mostrarMensaje('Correo de recuperación enviado');
-        console.log('Solicitud enviada', resp);
+        this.mostrarMensaje("Correo de recuperación enviado");
+        console.log("Solicitud enviada", resp);
       },
       error: (err) => {
-        console.error('Error al solicitar cambio de contraseña', err);
+        console.error("Error al solicitar cambio de contraseña", err);
       },
     });
   }
 
   mostrarMensaje(mensaje: string) {
-    this.snackBar.open(mensaje, 'Cerrar', {
+    this.snackBar.open(mensaje, "Cerrar", {
       duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
+      horizontalPosition: "center",
+      verticalPosition: "bottom",
     });
   }
 
@@ -156,5 +170,16 @@ export class UsersComponent implements OnInit {
       this.cargandoDetalleId = null;
       this.cdr.markForCheck();
     });
+  }
+
+  @Output() crearUsuario = new EventEmitter<void>();
+
+  abrirModalCrearUsuario() {
+    this.crearUsuario.emit();
+  }
+
+  filtrarUsuarios() {
+    // Puedes hacer la lógica que desees aquí o delegar a un servicio:
+    console.log("Buscar:", this.filtroBusqueda, "Estado:", this.filtroEstado);
   }
 }

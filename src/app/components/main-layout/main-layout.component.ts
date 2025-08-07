@@ -102,11 +102,17 @@ export class MainLayoutComponent {
   }
 
   logout() {
-    this.auth.logout({
-      logoutParams: {
-        returnTo: document.location.origin,
+    this.userService.unactivateSkipMFA(this.user?.sub || "").subscribe({
+      next: () => {
+        console.log("Skip MFA deactivated successfully");
+        this.auth.logout({
+          logoutParams: {
+            returnTo: document.location.origin,
+          },
+        });
       },
     });
+    
   }
 
   puedeVerBoton(permiso: string): boolean {
@@ -124,13 +130,15 @@ export class MainLayoutComponent {
   }
 
   changeOrganization(orgId: string) {
-    if (orgId !== this.user?.['org_id']) {
-      this.auth.loginWithRedirect({
-        authorizationParams: {
-          organization: orgId,
-          redirect_uri: window.location.origin + '/home',
-        },
-      });
-    }
+  if (orgId !== this.user?.['org_id']) {
+    this.auth.loginWithRedirect({
+      authorizationParams: {
+        organization: orgId,
+        redirect_uri: window.location.origin + "/home",
+        // 🔽 Aquí la clave para detectar cambio de org sin MFA
+      },
+    });
   }
+}
+
 }

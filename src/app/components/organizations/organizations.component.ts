@@ -6,6 +6,7 @@ import { OrganizationsService } from '../../../core/services/api/organizations.s
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../../core/services/api/users.service';
 
 @Component({
   selector: "app-organizations",
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class OrganizationsComponent {
   @Output() backStep = new EventEmitter<void>();
+  @Output() finish = new EventEmitter<void>();
 
   nombreUsuario = "";
   orgDisplayName = "";
@@ -28,7 +30,8 @@ export class OrganizationsComponent {
   constructor(
     private userCreationState: UserCreationStateService,
     private appState: AppStateService,
-    private orgService: OrganizationsService
+    private orgService: OrganizationsService,
+    private userService: UserService
   ) {
     this.nombreUsuario = this.userCreationState.getUserData().name;
     console.log("Nombre del usuario: ", userCreationState.getUserData().name);
@@ -47,6 +50,41 @@ export class OrganizationsComponent {
           console.log(orgs);
         }
       });
+  }
+
+  finalizar() {
+    const userData = this.userCreationState.getUserData();
+    const perfil = this.userCreationState.getPerfil();
+    const organizationId = this.appState.organizationId();
+
+    if (!userData || !perfil || !organizationId) {
+      console.error("Faltan datos obligatorios para crear el usuario");
+      return;
+    }
+
+    const payload = {
+      connection: "PoC-Portal-TBK-Comercios",
+      email: userData.email,
+      given_name: userData.given_name,
+      family_name: userData.family_name,
+      name: userData.name,
+      username: userData.username,
+      organization_id: organizationId,
+      roles: perfil.subpermisos,
+    };
+
+    console.log("Payload final:", payload);
+
+    this.userService.createUser(payload).subscribe({
+      next: (response) => {
+        console.log("Usuario creado exitosamente:", response);
+        this.userCreationState.clear();
+        this.finish.emit();
+      },
+    });
+
+    // Aquí iría tu llamada HTTP:
+    // this.userService.createUser(payload).subscribe(...);
   }
 
   onFiltroCambiado() {

@@ -237,6 +237,26 @@ h2{
   cursor: not-allowed;
 }
 
+.button-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: #0061DB;
+  padding: 0 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s, outline 0.2s ease-in-out;
+}
+
+.button-action:disabled {
+  background: #E7EBF3;
+  color: #A0A0A0;
+  cursor: not-allowed;
+}
+
 .row-expandida td {
   padding: 0px 16px;
   background: #f9f9f9;
@@ -256,6 +276,10 @@ h2{
 
 .detalle-usuario ul {
   padding-left: 1rem;
+}
+
+.detalle-usuario li {
+  padding-top: .3rem;
 }
 
 table tr.mat-row,
@@ -307,11 +331,16 @@ table tr.row-expandida {
   border: none;
 }
 
-.spinner-container {
+.spinner-container{
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem 0;
+  
+}
+
+::ng-deep .custom-spinner svg circle {
+  stroke: #D5006C !important;
 }
 
 .estado-activo {
@@ -376,11 +405,4 @@ table tr.row-expandida {
   color: #707382;
   background-color: #ffffff;
   border-bottom: 1px solid #E7EBF3;
-}
-
-.spinner-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
 }

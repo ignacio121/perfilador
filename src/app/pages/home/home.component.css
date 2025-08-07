@@ -118,3 +118,29 @@
 .fixed-footer mat-icon {
   font-size: 24px;
 }
+
+.button-containers{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.error-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.alert {
+  padding: 16px 20px;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.alert-error {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}

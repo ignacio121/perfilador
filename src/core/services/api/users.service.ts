@@ -53,4 +53,16 @@ export class UserService {
     };
     return this.http.patch(`${this.apiUrl}/${id}/bloquear`, body);
   }
+
+  activateMFA(userId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${userId}/enable-mfa`, {});
+  }
+
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${userId}`);
+  }
+
+  unactivateSkipMFA(userId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${userId}/skip-mfa`, {});
+  }
 }

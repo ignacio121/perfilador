@@ -1,9 +1,54 @@
 <div class="container">
-  @if (users) {
     <div>
       <h1>Usuarios</h1>
 
-      <table mat-table [dataSource]="users" multiTemplateDataRows class="mat-elevation-z8 full-width-table">
+      <div class="toolbar-filtros">
+      <div class="filtros-busqueda">
+        <div class="input-container">
+          <div class="placeholder"> Busca por nombre, correo o RUT </div>
+          <input
+            type="text"
+            class="input"
+             [(ngModel)]="filtroBusqueda"
+            (ngModelChange)="onFiltroCambiado()"
+            placeholder="Buscar..."
+          />
+        </div>
+
+        <div class="input-container">
+          <div class="placeholder"> Estado </div>
+
+          <div class="select-container">
+            <select
+              id="state"
+              name="state"
+              class="select-control"
+              title="Selecciona el estado"
+              [(ngModel)]="filtroEstado"
+              (change)="onFiltroCambiado()"
+            >
+              <option disabled selected value="">Selecciona el estado</option>
+              <option value="all">Todos</option>
+              <option value="false">Activo</option>
+              <option value="true">Bloqueado</option>
+            </select>
+
+            <span class="select-icon">&#x25BC;</span>
+          </div>
+        </div>
+
+        <button class="button-icon" (click)="filtrarUsuarios()" [disabled]="!buscarHabilitado">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+
+      <button class="button" (click)="abrirModalCrearUsuario()">
+        Crear usuario
+        <mat-icon>person_add</mat-icon>
+      </button>
+    </div>
+
+      <table mat-table [dataSource]="users ?? []" class="mat-elevation-z0 tabla-usuarios" multiTemplateDataRows>
 
         <!-- Columnas visibles -->
         <ng-container matColumnDef="name">
@@ -52,7 +97,11 @@
                 <!-- 👇 Spinner si está cargando -->
                 @if (cargandoDetalleId === row.user_id) {
                   <div class="spinner-container">
-                    <mat-progress-spinner diameter="40" mode="indeterminate"></mat-progress-spinner>
+                    <mat-progress-spinner
+                      mode="indeterminate"
+                      diameter="50"
+                      class="custom-spinner"
+                    />
                   </div>
                 } @else {
                   <!-- 👇 Detalles del usuario -->
@@ -101,16 +150,25 @@
 
       </table>
 
-      <mat-paginator
-        [length]="totalItems"
-        [pageSize]="pageSize"
-        [pageIndex]="page - 1"
-        [pageSizeOptions]="[5, 10, 20]"
-        (page)="onPageChange($event)">
-      </mat-paginator>
+      @if(!users){
+        <div class="spinner-container">
+          <mat-progress-spinner
+            mode="indeterminate"
+            diameter="50"
+            class="custom-spinner"
+          />
+        </div>
+      } @else {
+        <mat-paginator
+          [length]="totalItems"
+          [pageSize]="pageSize"
+          [pageIndex]="page - 1"
+          [pageSizeOptions]="[5, 10, 20]"
+          (page)="onPageChange($event)">
+        </mat-paginator>
+      }
+
+      
     </div>
-  }
-  @else {
-    <div>Cargando usuarios...</div>
-  }
+  
 </div>

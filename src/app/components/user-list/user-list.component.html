@@ -46,11 +46,18 @@
         </button>
       </div>
 
-      <button class="button" (click)="abrirModalCrearUsuario()">
+      <button class="button" (click)="abrirCrearUsuario()">
         Crear usuario
         <mat-icon>person_add</mat-icon>
       </button>
     </div>
+
+    @if (usuarioCreado) {
+      <div class="mensaje-exito">
+        ✅ Usuario creado exitosamente
+      </div>
+    }
+
 
     <table mat-table [dataSource]="members ?? []" class="mat-elevation-z0 tabla-usuarios" multiTemplateDataRows>
 
@@ -87,6 +94,24 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <td mat-cell *matCellDef="let row">
+          <button class="button-action" (click)="abrirEditarUsuario()" [disabled]="!tienePermiso('change:status')">
+              <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="activeMfa">
+        <th mat-header-cell *matHeaderCellDef>Activar app MFA</th>
+        <td mat-cell *matCellDef="let row">
+          <button class="button-action" (click)="activeMFA(row.user_id)" [disabled]="!tienePermiso('change:status')">
+              <mat-icon>admin_panel_settings</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+
 
       <!-- Columna "expandida" (en una fila nueva) -->
       <ng-container matColumnDef="expandedDetail">
@@ -96,7 +121,11 @@
               <!-- 👇 Spinner si está cargando -->
               @if (cargandoDetalleId === row.user_id) {
                 <div class="spinner-container">
-                  <mat-progress-spinner diameter="40" mode="indeterminate"></mat-progress-spinner>
+                  <mat-progress-spinner
+                    mode="indeterminate"
+                    diameter="50"
+                    class="custom-spinner"
+                  />
                 </div>
               } @else {
                 <!-- 👇 Detalles del usuario -->
@@ -112,7 +141,7 @@
                         <strong>{{ org.display_name }}</strong> ({{ org.name }})
                         <ul>
                           @for (rol of org.roles; track rol.id) {
-                            <li>{{ rol.name }}: {{ rol.description }}</li>
+                            <li><strong>{{ rol.name }}:</strong> {{ rol.description }}</li>
                           }
                         </ul>
                       </li>
@@ -153,7 +182,11 @@
 
     @if (cargando) {
       <div class="spinner-container">
-        <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
+        <mat-progress-spinner
+          mode="indeterminate"
+          diameter="50"
+          class="custom-spinner"
+        />
       </div>
     }
 

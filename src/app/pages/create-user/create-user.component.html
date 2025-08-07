@@ -45,7 +45,7 @@
       <app-profiles (backStep)="retrocederStep()" (stepCompleted)="avanzarStep()" />
     }
     @if(currentStep === 3){
-      <app-organizations (backStep)="retrocederStep()" (stepCompleted)="avanzarStep()" />
+      <app-organizations (backStep)="retrocederStep()" (stepCompleted)="avanzarStep()" (finish)="verUserList(true)"/>
     }
 
   </div>

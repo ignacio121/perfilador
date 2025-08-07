@@ -30,9 +30,13 @@ export const appConfig: ApplicationConfig = {
       domain: authConfig.domain,
       clientId: authConfig.clientId,
       authorizationParams: {
-        audience: 'https://myapp/api',
-        redirect_uri: window.location.origin + '/home',
+        audience: "https://myapp/api",
+        redirect_uri: window.location.origin + "/home",
+        scope: "openid profile email",
       },
+      errorPath: "/error",
+      skipRedirectCallback: false,
+      cacheLocation: "localstorage",
     }),
     importProvidersFrom(
       HttpClientModule, // Agregado para proveer HttpClient

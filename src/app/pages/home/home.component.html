@@ -30,25 +30,24 @@
   <p>Todas las acciones realizadas dentro del sistema quedan registradas. Esto significa que ante cualquier duda o requerimiento, <strong>tendrás a tu disposición un historial transparente</strong> de cada movimiento: quién accedió, qué cambios hizo y cuándo lo hizo. Este nivel de seguimiento no solo <strong>fortalece la seguridad y confianza</strong> en el uso de la herramienta, sino que también te respalda a ti como parte del equipo de soporte, ayudando a resolver incidencias de forma más rápida y documentada.</p>
 </div>
 
-<div class="button-container" id="login-section" #loginSection>
-  <button class="login-button mat-raised-button" color="primary" (click)="login()">
-    Iniciar sesión (Antiguos)
+<div class="button-containers">
+  <div class="button-container" id="login-section" #loginSection>
+  <button class="login-button mat-raised-button" color="primary" (click)="login('PoC-Portal-TBK-Comercios')">
+    Iniciar sesión ( comercios )
   </button>
 </div>
+
 <div class="button-container" id="login-section" #loginSection>
   <button class="login-button mat-raised-button" color="primary" (click)="login('PoC-Portal-TBK-Internos')">
     Iniciar sesión ( internos )
   </button>
 </div>
+
 <div class="button-container" id="login-section" #loginSection>
-  <button class="login-button mat-raised-button" color="primary" (click)="login('PoC-Portal-TBK-Comercios')">
-    Iniciar sesión ( comercios )
-  </button>
-</div>
-<div class="button-container" id="login-section" #loginSection>
-  <button class="login-button mat-raised-button" color="primary" (click)="login('onepay-test', 'org_RG602fQkzD8g57e6')">
+  <button class="login-button mat-raised-button" color="primary" (click)="login('onepay', 'org_RG602fQkzD8g57e6')">
     Ejemplo onepay
   </button>
+</div>
 </div>
 
 
@@ -59,3 +58,15 @@
 >
   <mat-icon svgIcon="log-in"></mat-icon> Acceder
 </div>
+
+@if(error$ | async) {
+  @if(errorVisible){
+    <div class="error-message">
+      <div class="alert alert-error">
+        <h4>Error de Autenticación</h4>
+        <p>{{ (error$ | async)?.message }}</p>
+      </div>
+    </div>
+  }
+}
+

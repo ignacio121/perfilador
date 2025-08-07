@@ -33,10 +33,10 @@ export class UserCreateComponent {
     this.currentStep--;
   }
 
-  @Output() verUsuarios = new EventEmitter<void>();
+  @Output() verUsuarios = new EventEmitter<{ creado?: boolean }>();
 
-  verUserList() {
-    this.verUsuarios.emit();
+  verUserList(creado = false) {
+    this.verUsuarios.emit({ creado });
   }
 
   onUserDataReceived(data: any) {

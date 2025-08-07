@@ -14,7 +14,7 @@ export class PasswordService {
     const body = {
       client_id: authConfig.clientId,
       email,
-      connection: 'Username-Password-Authentication',
+      connection: "PoC-Portal-TBK-Comercios",
     };
 
     return this.http.post(this.url, body, {

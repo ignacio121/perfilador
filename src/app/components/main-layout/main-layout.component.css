@@ -59,9 +59,14 @@
 
 .custom-sidenav mat-icon {
   margin-right: 14px;
-  font-size: 26px;
+  font-size: 22px;
   color: #2D3338;
-  transition: color 0.2s;
+  min-width: 26px;
+  text-align: center;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .custom-sidenav a:hover mat-icon {

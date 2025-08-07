@@ -16,6 +16,14 @@ export class App {
     private auth: AuthService,
     private router: Router,
   ) {
+    this.auth.user$.subscribe((user) => {
+      if (user?.["org_name"] === "one-pay") {
+
+        console.log("🧑 Usuario logueado:", user?.["org_name"]);
+        this.router.navigate(["/onepay"]);
+
+      }
+    });
 
     this.auth.isAuthenticated$.subscribe((isAuth) => {
       if (isAuth && this.router.url === '/') {

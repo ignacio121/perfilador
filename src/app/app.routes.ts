@@ -5,6 +5,9 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+
+  { path: 'onepay', loadComponent: () => import('./pages/simulador-onepay/simulador-onepay.component').then(m => m.SimuladorOnepayComponent), canActivate: [AuthGuard]},
+
   {
     path: '',
     component: MainLayoutComponent,
@@ -18,4 +21,5 @@ export const routes: Routes = [
       { path: 'create-users', loadComponent: () => import('./pages/create-user/create-user.component').then(m => m.UserCreateComponent)}
     ]
   },
+  { path: "**", redirectTo: "" },
 ];

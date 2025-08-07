@@ -9,20 +9,24 @@ import {
 import { AuthService } from '@auth0/auth0-angular';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable, of, tap, timer } from 'rxjs';
+import { AsyncPipe } from "@angular/common";
 
 @Component({
-  selector: 'app-home',
+  selector: "app-home",
   standalone: true,
-  imports: [MatIconModule],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  imports: [MatIconModule, AsyncPipe],
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements AfterViewInit {
-  @ViewChild('loginSection', { static: false }) loginSection!: ElementRef;
+  @ViewChild("loginSection", { static: false }) loginSection!: ElementRef;
   loginVisible = true;
   lastScrollPosition = 0;
   scrollingUp = false;
+
+  error$!: Observable<any>;
 
   constructor(
     private auth: AuthService,
@@ -30,9 +34,11 @@ export class HomeComponent implements AfterViewInit {
     sanitizer: DomSanitizer
   ) {
     iconRegistry.addSvgIcon(
-      'log-in',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/log-in.svg')
+      "log-in",
+      sanitizer.bypassSecurityTrustResourceUrl("assets/icons/log-in.svg")
     );
+
+    this.error$ = this.auth.error$;
   }
 
   ngAfterViewInit() {
@@ -50,7 +56,10 @@ export class HomeComponent implements AfterViewInit {
     }
   }
 
-  login(conecction: string = 'Username-Password-Authentication', organization: string = '') {
+  login(
+    conecction: string = "Username-Password-Authentication",
+    organization: string = ""
+  ) {
     this.auth.loginWithRedirect({
       authorizationParams: {
         connection: conecction,
@@ -60,11 +69,11 @@ export class HomeComponent implements AfterViewInit {
   }
 
   scrollToLogin() {
-    this.loginSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    this.loginSection.nativeElement.scrollIntoView({ behavior: "smooth" });
     this.loginVisible = true;
   }
 
-  @HostListener('window:scroll', [])
+  @HostListener("window:scroll", [])
   onScroll() {
     const currentScrollPosition = window.scrollY;
 
@@ -75,5 +84,22 @@ export class HomeComponent implements AfterViewInit {
     }
 
     this.lastScrollPosition = currentScrollPosition;
+  }
+
+  retry() {
+    window.location.reload();
+  }
+
+  errorVisible: boolean = false;
+
+  ngOnInit() {
+    this.error$ = this.auth.error$.pipe(
+      tap((error) => {
+        if (error) {
+          this.errorVisible = true;
+          timer(3000).subscribe(() => (this.errorVisible = false));
+        }
+      })
+    );
   }
 }

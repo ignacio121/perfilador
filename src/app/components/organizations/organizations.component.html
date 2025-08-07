@@ -53,7 +53,7 @@
     Atrás
   </button>
 
-  <button class="button" >
+  <button class="button" [disabled]="!optionSelected" (click)="finalizar()">
     FInalizar
   </button>
 </div>

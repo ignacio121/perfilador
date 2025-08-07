@@ -1,0 +1,27 @@
+<body>
+    <div class="onepay-container">
+        <div class="onepay-logo">
+            <img src="https://play-lh.googleusercontent.com/mvedVCbQg6ADKUYYraVLOlmOfOy2Rz66kEPvbmxt5xZ2TTa90Go9jBD2dJrwWmEo5g8=w480-h960" alt="Logo OnePay">
+        </div>
+        <span class="user-info">
+            <strong>Email:</strong>  {{user$.email}}
+        </span>
+        <span class="user-info">
+            <strong>Email verificado:</strong>  {{user$.email_verified}}
+        </span>
+        <span class="user-info">
+            <strong>Nombre:</strong>  {{user$.name}}
+        </span>
+        <span class="user-info">
+            <strong>User ID:</strong>  {{user$.sub}}
+        </span>
+        <span class="user-info">
+            <strong>Tipo de usuario:</strong>  {{user$.org_name}}
+        </span>
+        <a class="user-gestion" (click)="logout()">
+            Cerrar sesión
+            <mat-icon class="logout-icon">logout</mat-icon>
+        </a>
+    </div>
+    
+</body>
