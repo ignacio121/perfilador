@@ -1,6 +1,6 @@
 {
-  "domain": "ciamtbk-dev.transbank.auth0.com",
-  "clientId": "RxXIFZjlMm76TZM9Yp4yztpkTFUbdgVU",
+  "domain": "pruebas-ignaciom.us.auth0.com",
+  "clientId": "S9DhgMgqOSSAKDYpzfIkEZQ8ZLTWZDIR",
   "authorizationParams": {
     "audience": "https://myapp/api"
   },

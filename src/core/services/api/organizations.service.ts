@@ -15,13 +15,20 @@ export interface Members {
   picture: string;
 }
 
+
+
 @Injectable({
   providedIn: "root",
 })
 export class OrganizationsService {
   private apiUrl = "/api/organization";
+  private orgSwitched: Organization | null = null;
 
   constructor(private http: HttpClient) {}
+
+  getOrganizations(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}`);
+  }
 
   getOrganizationsOfUser(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/me`);
@@ -45,5 +52,21 @@ export class OrganizationsService {
         blocked: filtroEstado || "",
       },
     });
+  }
+
+  findOrganizationType(type: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/type/${type}`, {});
+  }
+
+  switchOrganization(orgId: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${orgId}/switch`, {});
+  }
+
+  setOrgSwitched(org: Organization) {
+    this.orgSwitched = org;
+  }
+
+  getOrgSwitched() {
+    return this.orgSwitched;
   }
 }

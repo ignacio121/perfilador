@@ -4,10 +4,7 @@
     @if (user) {
       <div class="user-section">
         <span class="user-info">
-          Hola {{ user.name || user.email }}: estás viendo la cuenta de {{ org_name }}
-        </span>
-        <span class="last-login">
-          Tu último acceso fue el {{ userDetails?.['last_login'] | fechaFormal }}.
+          Hola {{ user.name || user.email }}@if(org_name){: estás viendo la cuenta de {{ org_name }}}
         </span>
       </div>
     }
@@ -15,14 +12,19 @@
 
   <div style="display: flex; align-items: center; gap: 1rem;">
     <span class="actual-date">{{ today | fechaFormal }}</span>
-    @if(!puedeVerBoton("internal_user")){
-      <a class="user-gestion" matButton [matMenuTriggerFor]="menu"> <span class="user-gestion">¿Deseas cambiar de organización?</span></a>
-    }
+    
+    <a class="user-gestion" matButton [matMenuTriggerFor]="menu">
+       <span class="user-gestion">
+          @if(user?.["org_id"] === "org_0GxkE40Cnmk20HN0"){Buscar Comercios}
+          @else {¿Deseas cambiar de organización?}
+       </span>
+    </a>
+    
     <mat-menu #menu="matMenu">
       @for (org of organizations; track org.id) {
         <button mat-menu-item (click)="changeOrganization(org.id)">
           {{ org.display_name }}
-          @if( user?.['org_id'] === org.id) {
+          @if( org_selected === org.id) {
             <mat-icon>check_circle</mat-icon>
           }
         </button>
@@ -38,21 +40,21 @@
 <div class="custom-sidenav-container">
   <nav class="custom-sidenav">
     <ul>
-      @if (puedeVerBoton("read:organizations") && puedeVerBoton("create:users") && !puedeVerBoton("internal_user")){
+      @if (puedeVerBoton("users:manage")){
         <li>
           <a [routerLink]="['/my-users']" routerLinkActive="active">
             <mat-icon>group</mat-icon>
             Mis usuarios
           </a>
         </li>
-      } @if(puedeVerBoton("internal_user")){
+      } @if(puedeVerBoton("internal_user") && !puedeVerBoton("users:manage")){
         <li>
           <a [routerLink]="['/users']" routerLinkActive="active">
             <mat-icon>group</mat-icon>
             Usuarios
           </a>
         </li>
-      } @if(puedeVerBoton("read:informe_ventas")){
+      } @if(puedeVerBoton("ventas:read")){
         <li>
           <a >
             <mat-icon>monetization_on</mat-icon>
@@ -73,14 +75,14 @@
             Solicitudes
           </a>
         </li>
-      } @if(puedeVerBoton("read:anulaciones")){
+      } @if(puedeVerBoton("anulaciones:read")){
         <li>
           <a >
             <mat-icon>cancel</mat-icon> 
             Anular ventas
           </a>
         </li>
-      } @if(puedeVerBoton("read:contracargos")){
+      } @if(puedeVerBoton("contracargos:read")){
         <li>
           <a >
             <mat-icon>gavel</mat-icon>

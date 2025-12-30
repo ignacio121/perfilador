@@ -6,6 +6,7 @@ import {
   OrganizationsService,
 } from '../../../core/services/api/organizations.service';
 import { UserService } from '../../../core/services/api/users.service';
+import { jwtDecode as jwt_decode } from "jwt-decode";
 
 @Component({
   selector: 'app-post-login-home',
@@ -17,6 +18,8 @@ export class PostLoginHomeComponent {
   user: User | null = null;
   organizations: Organization[] | null = null;
   org_name: string = '';
+  access_token: any = null;
+  user_type: string = '';
 
   constructor(
     private auth: AuthService,
@@ -32,6 +35,18 @@ export class PostLoginHomeComponent {
         this.cargarUsuario();
       }
     });
+
+    this.auth.getAccessTokenSilently().subscribe((token) => {
+          if (token) {
+            const decoded: any = jwt_decode(token);
+            this.access_token = decoded;
+            if (this.access_token.permissions.find((perm: string) =>perm.includes("consultivo_psp")) === "consultivo_psp") {
+              this.user_type = "consultivo_psp";
+            } else {
+              this.user_type = "consultivo_tbk";
+            }
+          }
+        });
   }
 
   cargarOrganizaciones() {

@@ -23,6 +23,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIcon } from '@angular/material/icon';
 import { EventEmitter, Output } from '@angular/core'
+import { OrganizationStorageService } from '../../../core/services/api/organization-storage.service';
 
 
 @Component({
@@ -55,6 +56,8 @@ export class UserListComponent implements OnInit {
     "activeMfa",
   ];
 
+  org_id: string | null = null;
+
   expandedUserId: string | null = null;
   detallesUsuario: any = null;
   allColumns = [...this.displayedColumns, "expandedDetail"];
@@ -72,10 +75,11 @@ export class UserListComponent implements OnInit {
   constructor(
     private userService: UserService,
     private orgService: OrganizationsService,
+    private switchOrgService: OrganizationStorageService,
     private permissionsService: PermissionsService,
     private auth: AuthService,
     private cdr: ChangeDetectorRef,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -84,10 +88,16 @@ export class UserListComponent implements OnInit {
     this.auth.user$.subscribe((user) => {
       this.user = user ?? null;
 
+      if (this.user?.["org_id"] === "org_0GxkE40Cnmk20HN0") {
+        console.log(this.orgService.getOrgSwitched()?.id);
+        console.log(this.switchOrgService.getSwitchedOrgId());
+        this.org_id = this.switchOrgService.getSwitchedOrgId() || null;
+      }
+      
       if (this.user?.["org_id"]) {
         this.orgService
           .getMembersOfOrganization(
-            this.user["org_id"],
+            this.org_id || this.user?.["org_id"],
             this.filtroBusqueda,
             this.filtroEstado
           )
@@ -125,7 +135,7 @@ export class UserListComponent implements OnInit {
     this.cdr.markForCheck();
 
     this.userService
-      .getUserById(userId, this.user?.["org_id"])
+      .getUserById(userId, this.org_id || this.user?.["org_id"])
       .subscribe((data) => {
         this.detallesUsuario = data;
         this.cargandoDetalleId = null;
@@ -200,7 +210,7 @@ export class UserListComponent implements OnInit {
 
     this.orgService
       .getMembersOfOrganization(
-        this.user?.["org_id"],
+        this.org_id || this.user?.["org_id"],
         this.filtroBusqueda,
         this.filtroEstado === "all" ? "" : this.filtroEstado
       )

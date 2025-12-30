@@ -5,5 +5,10 @@
       {{ user.name || user.email}}}</h1>
     <p>Aqui estara la pagina de inicio luego del login</p>
     <p>Actualmente te encuentras en la organizacion: {{org_name}}</p>
+    @if(user_type === "consultivo_psp") {
+      <p>Actualmente ingresaste como: <strong>Consultivo PSP</strong></p>
+    } @else {
+      <p>Actualmente ingresaste como: <strong>Consultivo TBK</strong></p>
+    }
   </div>
 </div>

@@ -88,7 +88,7 @@
         <td mat-cell *matCellDef="let row">
           <mat-slide-toggle
            [checked]="row.blocked"
-           [disabled]="!tienePermiso('change:status')"
+           [disabled]="!tienePermiso('users:manage')"
            (change)="onToggleBloqueo(row, $event)"
           />
         </td>
@@ -97,7 +97,7 @@
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>Editar</th>
         <td mat-cell *matCellDef="let row">
-          <button class="button-action" (click)="abrirEditarUsuario()" [disabled]="!tienePermiso('change:status')">
+          <button class="button-action" (click)="abrirEditarUsuario()" [disabled]="!tienePermiso('users:manage')">
               <mat-icon>edit</mat-icon>
             </button>
         </td>
@@ -106,7 +106,7 @@
       <ng-container matColumnDef="activeMfa">
         <th mat-header-cell *matHeaderCellDef>Activar app MFA</th>
         <td mat-cell *matCellDef="let row">
-          <button class="button-action" (click)="activeMFA(row.user_id)" [disabled]="!tienePermiso('change:status')">
+          <button class="button-action" (click)="activeMFA(row.user_id)" [disabled]="!tienePermiso('users:manage')">
               <mat-icon>admin_panel_settings</mat-icon>
             </button>
         </td>

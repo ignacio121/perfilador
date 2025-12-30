@@ -57,14 +57,10 @@ export class HomeComponent implements AfterViewInit {
   }
 
   login(
-    conecction: string = "Username-Password-Authentication",
+    conecction: string = "",
     organization: string = ""
   ) {
     this.auth.loginWithRedirect({
-      authorizationParams: {
-        connection: conecction,
-        organization: organization,
-      },
     });
   }
 

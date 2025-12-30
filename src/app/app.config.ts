@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
       domain: authConfig.domain,
       clientId: authConfig.clientId,
       authorizationParams: {
-        audience: "https://myapp/api",
+        audience: "https://api.canal-tbk.cl",
         redirect_uri: window.location.origin + "/home",
         scope: "openid profile email",
       },
